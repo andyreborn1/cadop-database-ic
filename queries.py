@@ -1,4 +1,5 @@
-#CREATE TABLES
+#CRIAR TABELAS
+
 cadop_table_create = '''
 create table operadoras(
     registro_ans int primary key,
@@ -34,3 +35,18 @@ create table relatorio_contabil(
     );
 '''
 
+# INSERIR REGISTROS
+
+cadop_table_insert = '''
+insert into operadoras (
+    registro_ans, cnpj, razao_social, nome_fantasia, modalidade, logradouro,
+    numero, complemento, bairro, cidade, uf, cep, ddd, telefone, fax, email, 
+    representante, cargo_representante, data_registro
+    ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+'''
+
+relatorio_table_insert = '''
+insert into relatorio_contabil (
+    data, registro_ans, conta_contabil, descricao, saldo_final
+    ) values (%s,%s,%s,%s,%s)
+'''
