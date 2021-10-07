@@ -22,3 +22,15 @@ create table operadoras(
     data_registro date not null
     );
 '''
+
+relatorio_table_create = '''
+create table relatorio_contabil(
+    id serial primary key,
+    data date not null,
+    registro_ans int not null,
+    conta_contabil int not null,
+    descricao varchar(150) not null,
+    saldo_final int not null
+    );
+'''
+
