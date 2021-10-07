@@ -48,3 +48,14 @@ def create_tables(conn, cur):
         
     conn.commit()
     
+def main():
+    conn, cur = create_database()
+    
+    drop_tables(conn, cur)
+    create_tables(conn, cur)
+    
+    conn.close()
+    cur.close()
+    
+if __name__ == '__main__':
+    main()
