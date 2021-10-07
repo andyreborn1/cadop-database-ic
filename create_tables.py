@@ -36,3 +36,15 @@ def create_database():
     return conn, cursor
 
 
+def drop_tables(conn, cur):
+    for query in drop_tables_queries:
+        cur.execute(query)
+        
+    conn.commit()
+    
+def create_tables(conn, cur):
+    for query in create_tables_queries:
+        cur.execute(query)
+        
+    conn.commit()
+    
