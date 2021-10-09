@@ -1,15 +1,20 @@
 import psycopg2
 from queries import create_tables_queries, drop_tables_queries
+import sys
 
 def create_database():
     #Conecta no banco de dados padrão do postgres
-    conn = psycopg2.connect(
-        database="postgres",
-        user="postgres",
-        password="#Lecter2013",
-        host="127.0.0.1",
-        port="5432",
-    )
+    try:
+        conn = psycopg2.connect(
+            database="postgres",
+            user="postgres",
+            password="#Lecter2013",
+            host="127.0.0.1",
+            port="5432",
+        )
+    except (Exception) as error:
+        print(error)
+        sys.exit(1)
     
     conn.autocommit = True
     cursor = conn.cursor()
@@ -23,13 +28,17 @@ def create_database():
     cursor.close()
     
     #Conecta ao banco de dados relatorio_contabil
-    conn = psycopg2.connect(
-        database="relatorio_contabil",
-        user="postgres",
-        password="#Lecter2013",
-        host="127.0.0.1",
-        port="5432",
-    )
+    try:
+        conn = psycopg2.connect(
+            database="relatorio_contabil",
+            user="postgres",
+            password="#Lecter2013",
+            host="127.0.0.1",
+            port="5432",
+        )
+    except (Exception) as error:
+        print(error)
+        sys.exit(1)
     
     cursor = conn.cursor()
     
