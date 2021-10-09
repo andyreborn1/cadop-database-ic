@@ -1,6 +1,6 @@
 from pathlib import Path
 from ftplib import FTP
-
+import requests
 
 #Baixar arquivos de relatório do ftp
 def download_ftp(domain, dirname, years):
@@ -28,6 +28,11 @@ def main():
     
     download_ftp('ftp.dadosabertos.ans.gov.br','/FTP/PDA/demonstracoes_contabeis/'
                  ,['2019','2020','2021'])
+    
+    #Download do arquivo de operadoras do cadop
+    url = 'http://www.ans.gov.br/externo/site_novo/informacoes_avaliacoes_oper/lista_cadop.asp'
+    with open('data/cadop/cadop.csv', 'wb') as fd:
+        fd.write(requests.get(url).content)
     
 if __name__ == '__main__':
     main()
