@@ -3,6 +3,7 @@ from ftplib import FTP
 from zipfile import ZipFile
 import requests
 import glob
+import os
 
 #Baixar arquivos de relatório do ftp
 def download_ftp(domain, dirname, years):
@@ -28,6 +29,7 @@ def unzip_files():
     for z in all_zip:
         with ZipFile(z, 'r') as zf:
             zf.extractall("data/reports/")
+        os.remove(z)
     
 def main():
     #Cria a estrutura de pastas, caso não exista
