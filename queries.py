@@ -1,4 +1,8 @@
-#CRIAR TABELAS
+# DELETAR TABELAS
+cadop_table_drop = 'drop table if exists operadoras'
+relatorio_table_drop = 'drop table if exists relatorio_contabil'
+
+# CRIAR TABELAS
 
 cadop_table_create = '''
 create table operadoras(
@@ -8,18 +12,18 @@ create table operadoras(
     nome_fantasia varchar(150),
     modalidade varchar(50) not null,
     logradouro varchar(50) not null,
-    numero int not null,
+    numero varchar(20) not null,
     complemento varchar(150),
     bairro varchar(50) not null,
     cidade varchar(50) not null,
     uf varchar(2) not null,
     cep varchar(8) not null,
-    ddd varchar(2),
-    telefone varchar(10),
-    fax varchar(10),
-    email varchar(20),
+    ddd real,
+    telefone varchar(20),
+    fax varchar(20),
+    email varchar(50),
     representante varchar(150) not null,
-    cargo_representante varchar(20) not null,
+    cargo_representante varchar(50) not null,
     data_registro date not null
     );
 '''
@@ -31,7 +35,7 @@ create table relatorio_contabil(
     registro_ans int not null,
     conta_contabil int not null,
     descricao varchar(150) not null,
-    saldo_final int not null
+    saldo_final numeric not null
     );
 '''
 
@@ -50,3 +54,14 @@ insert into relatorio_contabil (
     data, registro_ans, conta_contabil, descricao, saldo_final
     ) values (%s,%s,%s,%s,%s)
 '''
+
+# Encontrar registros
+
+select_ids = '''
+select rel., 
+'''
+
+
+#LISTA DE QUERIES
+drop_tables_queries = [cadop_table_drop, relatorio_table_drop]
+create_tables_queries = [cadop_table_create, relatorio_table_create]
