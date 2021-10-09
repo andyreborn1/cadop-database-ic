@@ -31,7 +31,7 @@ create table operadoras(
 relatorio_table_create = '''
 create table relatorio_contabil(
     id serial primary key,
-    data date not null,
+    data_trimestre date not null,
     registro_ans int not null,
     conta_contabil int not null,
     descricao varchar(150) not null,
@@ -51,16 +51,13 @@ insert into operadoras (
 
 relatorio_table_insert = '''
 insert into relatorio_contabil (
-    data, registro_ans, conta_contabil, descricao, saldo_final
+    data_trimestre, registro_ans, conta_contabil, descricao, saldo_final
     ) values (%s,%s,%s,%s,%s)
 '''
 
 # Encontrar registros
-
 select_ids = '''
-select rel., 
 '''
-
 
 #LISTA DE QUERIES
 drop_tables_queries = [cadop_table_drop, relatorio_table_drop]

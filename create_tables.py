@@ -5,10 +5,10 @@ def create_database():
     #Conecta no banco de dados padrão do postgres
     conn = psycopg2.connect(
         database="postgres",
-        user="student",
-        password="student",
+        user="postgres",
+        password="#Lecter2013",
         host="127.0.0.1",
-        port="5433",
+        port="5432",
     )
     
     conn.autocommit = True
@@ -25,10 +25,10 @@ def create_database():
     #Conecta ao banco de dados relatorio_contabil
     conn = psycopg2.connect(
         database="relatorio_contabil",
-        user="dio",
-        password="dio",
+        user="postgres",
+        password="#Lecter2013",
         host="127.0.0.1",
-        port="5433",
+        port="5432",
     )
     
     cursor = conn.cursor()
