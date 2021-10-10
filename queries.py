@@ -18,7 +18,7 @@ create table operadoras(
     cidade varchar(50) not null,
     uf varchar(2) not null,
     cep varchar(8) not null,
-    ddd real,
+    ddd float,
     telefone varchar(20),
     fax varchar(20),
     email varchar(50),
@@ -39,24 +39,23 @@ create table relatorio_contabil(
     );
 '''
 
-# INSERIR REGISTROS
+# Colunas
+relatorio_columns = ['data_trimestre', 'registro_ans', 'conta_contabil',
+                     'descricao', 'saldo_final']
 
-cadop_table_insert = '''
-insert into operadoras (
-    registro_ans, cnpj, razao_social, nome_fantasia, modalidade, logradouro,
-    numero, complemento, bairro, cidade, uf, cep, ddd, telefone, fax, email, 
-    representante, cargo_representante, data_registro
-    ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-'''
-
-relatorio_table_insert = '''
-insert into relatorio_contabil (
-    data_trimestre, registro_ans, conta_contabil, descricao, saldo_final
-    ) values (%s,%s,%s,%s,%s)
-'''
-
-# Encontrar registros
-select_ids = '''
+#Busca de registros
+registros_select = '''
+select 
+	r.registro_ans, o.razao_social, sum (r.saldo_final)
+from relatorio_contabil r
+left join operadoras o
+using (registro_ans)
+where r.descricao = 'EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR '
+and r.registro_ans = o.registro_ans
+and r.data_trimestre >= '{}'
+group by (r.registro_ans, o.razao_social, r.data_trimestre)
+order by sum(r.saldo_final) desc
+limit 10
 '''
 
 #LISTA DE QUERIES
