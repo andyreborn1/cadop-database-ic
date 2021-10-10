@@ -107,7 +107,9 @@ def main():
     for path in all_path:
         load_reports(cur, conn, path)
     
-    
+    #Chamada da função de busca
+    get_reports('trimestre.csv','2021-01-04', conn)
+    get_reports('ultimo_ano.csv','2020-01-07', conn)
     
     cur.close()
     conn.close()
