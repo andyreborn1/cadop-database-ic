@@ -7,8 +7,8 @@ def create_database():
     try:
         conn = psycopg2.connect(
             database="postgres",
-            user="postgres",
-            password="#Lecter2013",
+            user="",
+            password="",
             host="127.0.0.1",
             port="5432",
         )
@@ -31,8 +31,8 @@ def create_database():
     try:
         conn = psycopg2.connect(
             database="relatorio_contabil",
-            user="postgres",
-            password="#Lecter2013",
+            user="",
+            password="",
             host="127.0.0.1",
             port="5432",
         )

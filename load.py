@@ -89,8 +89,8 @@ def main():
     try:
         conn = psycopg2.connect(
             database="relatorio_contabil",
-            user="student",
-            password="student",
+            user="",
+            password="",
             host="127.0.0.1",
             port="5432",
         )
