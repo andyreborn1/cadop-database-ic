@@ -63,7 +63,26 @@ def insert_cadop(cur, conn, path):
     except (Exception) as error:
         print("Error: %s" % error)
         conn.rollback()
+
+#Função para recuperar os registros do banco de dados
+def get_reports(filename, date, conn):
     
+    #Busca os registros da query como dataframe
+    try:
+        print('Buscando registros...')
+        result = pd.read_sql_query(registros_select.format(date), conn)
+        
+    except (Exception) as error:
+        print(error)
+    
+    #Formata a coluna com float
+    pd.set_option('display.float_format', lambda x: '%.2f' % x)
+    result.columns = [['Registro ANS','Razão Social','Despesas']]
+    
+    #Salva os registros como csv
+    result.to_csv(filename, index=False, sep=';')
+    print('Registros salvos como {}'.format(filename))
+
 def main():
     
     #Cria uma conexão com o banco de dados
@@ -87,6 +106,7 @@ def main():
     all_path = glob.glob("data/reports/*.csv")
     for path in all_path:
         load_reports(cur, conn, path)
+    
     
     
     cur.close()

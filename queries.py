@@ -53,7 +53,7 @@ using (registro_ans)
 where r.descricao = 'EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR '
 and r.registro_ans = o.registro_ans
 and r.data_trimestre >= '{}'
-group by (r.registro_ans, o.razao_social, r.data_trimestre)
+group by (r.registro_ans, o.razao_social)
 order by sum(r.saldo_final) desc
 limit 10
 '''
