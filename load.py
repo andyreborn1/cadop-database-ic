@@ -1,5 +1,8 @@
+import psycopg2
 import pandas as pd
 from queries import *
+import glob
+import sys
 from io import StringIO
 
 # Carrega dados das planilhas de relatóros no banco de dados
@@ -60,4 +63,35 @@ def insert_cadop(cur, conn, path):
     except (Exception) as error:
         print("Error: %s" % error)
         conn.rollback()
+    
+def main():
+    
+    #Cria uma conexão com o banco de dados
+    try:
+        conn = psycopg2.connect(
+            database="relatorio_contabil",
+            user="student",
+            password="student",
+            host="127.0.0.1",
+            port="5432",
+        )
+    except (Exception) as error:
+        print(error)
+        sys.exit(1)
+    
+    cur = conn.cursor()
+    
+    #Chamada das funções de inserção
+    insert_cadop(cur, conn, path="data/cadop/cadop.csv")
+    
+    all_path = glob.glob("data/reports/*.csv")
+    for path in all_path:
+        load_reports(cur, conn, path)
+    
+    
+    cur.close()
+    conn.close()
 
+
+if __name__ == "__main__":
+    main()
